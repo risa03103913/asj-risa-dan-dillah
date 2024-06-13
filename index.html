@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Nilai Siswa</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input[type="text"], input[type="date"], input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Input Biodata Siswa</h2>
+        <form id="biodataForm">
+            <input type="text" placeholder="Nama Siswa" id="nama" required><br>
+            <input type="text" placeholder="NISN" id="nisn" required><br>
+            <input type="text" placeholder="Tempat, Tanggal Lahir" id="ttl" required><br>
+            <input type="text" placeholder="Alamat" id="alamat" required><br>
+            <button type="submit">Simpan</button>
+        </form>
+        <h2>Input Penilaian Siswa</h2>
+        <form id="penilaianForm">
+            <select id="mataPelajaran">
+                <option value="bahasaIndonesia">Bahasa Indonesia</option>
+                <option value="pkk">PKK</option>
+                <option value="agama">Agama</option>
+                <option value="Pjok">Pjok</option>
+                <option value="Matematika">Matematika</option>
+                <option value="Aij">Aij</option>
+                <option value="Wan">Wan</option>
+                <option value="Asj">Asj</option>
+                <option value="Bahasa Inggris">Bahasa Inggris</option>
+                <option value="Pkn">Pkn</option>
+                <option value="Tlj">Tlj</option>
+                <!-- Tambahkan opsi untuk mata pelajaran lainnya -->
+            </select><br>
+            <input type="number" placeholder="Kehadiran" id="kehadiran" required><br>
+            <input type="number" placeholder="Nilai Tugas" id="tugas" required><br>
+            <input type="number" placeholder="Nilai Mid Semester" id="mid" required><br>
+            <input type="number" placeholder="Nilai Semester" id="semester" required><br>
+            <button type="submit">Simpan</button>
+        </form>
+        <h2>Output</h2>
+        <table id="outputTable">
+            <thead>
+                <tr>
+                    <th>Nama Siswa</th>
+                    <th>NISN</th>
+                    <th>TTL</th>
+                    <th>Alamat</th>
+                    <th>Mata Pelajaran</th>
+                    <th>Kehadiran</th>
+                    <th>Nilai Tugas</th>
+                    <th>Nilai Mid Semester</th>
+                    <th>Nilai Semester</th>
+                </tr>
+            </thead>
+            <tbody id="outputBody">
+                <!-- Output data akan ditampilkan di sini -->
+            </tbody>
+        </table>
+    </div>
+    <script>
+        document.getElementById("biodataForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            let nama = document.getElementById("nama").value;
+            let nisn = document.getElementById("nisn").value;
+            let ttl = document.getElementById("ttl").value;
+            let alamat = document.getElementById("alamat").value;
+            document.getElementById("outputBody").innerHTML += `
+                <tr>
+                    <td>${nama}</td>
+                    <td>${nisn}</td>
+                    <td>${ttl}</td>
+                    <td>${alamat}</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+            `;
+            document.getElementById("biodataForm").reset();
+        });
+
+                document.getElementById("penilaianForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            let mataPelajaran = document.getElementById("mataPelajaran").value;
+            let kehadiran = document.getElementById("kehadiran").value;
+            let tugas = document.getElementById("tugas").value;
+            let mid = document.getElementById("mid").value;
+            let semester = document.getElementById("semester").value;
+            let outputBody = document.getElementById("outputBody");
+            let newRow = outputBody.insertRow();
+
+            // Masukkan data ke dalam sel-sel
+            newRow.insertCell().appendChild(document.createTextNode("-")); // Nama Siswa
+            newRow.insertCell().appendChild(document.createTextNode("-")); // NISN
+            newRow.insertCell().appendChild(document.createTextNode("-")); // TTL
+            newRow.insertCell().appendChild(document.createTextNode("-")); // Alamat
+            newRow.insertCell().appendChild(document.createTextNode(mataPelajaran)); // Mata Pelajaran
+            newRow.insertCell().appendChild(document.createTextNode(kehadiran)); // Kehadiran
+            newRow.insertCell().appendChild(document.createTextNode(tugas)); // Nilai Tugas
+            newRow.insertCell().appendChild(document.createTextNode(mid)); // Nilai Mid Semester
+            newRow.insertCell().appendChild(document.createTextNode(semester)); // Nilai Semester
+         });
+         
+    </script>
+</body>
+</html>
